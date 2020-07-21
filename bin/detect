@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Swanye"
+
+exit 0
