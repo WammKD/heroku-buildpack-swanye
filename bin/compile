@@ -96,5 +96,23 @@ done
 
 
 
+echo "# Set default values for all following accounts."  >  $BUILD_DIR/.apt/etc/msmtprc
+echo "defaults"                                          >> $BUILD_DIR/.apt/etc/msmtprc
+echo "auth           on"                                 >> $BUILD_DIR/.apt/etc/msmtprc
+echo "tls            on"                                 >> $BUILD_DIR/.apt/etc/msmtprc
+echo "tls_trust_file /etc/ssl/certs/ca-certificates.crt" >> $BUILD_DIR/.apt/etc/msmtprc
+echo "logfile        ~/.msmtp.log"                       >> $BUILD_DIR/.apt/etc/msmtprc
+echo "# Gmail"                                           >> $BUILD_DIR/.apt/etc/msmtprc
+echo "account        gmail"                              >> $BUILD_DIR/.apt/etc/msmtprc
+echo "host           smtp.gmail.com"                     >> $BUILD_DIR/.apt/etc/msmtprc
+echo "port           587"                                >> $BUILD_DIR/.apt/etc/msmtprc
+echo "from           $EMAIL_ADDRESS"                     >> $BUILD_DIR/.apt/etc/msmtprc
+echo "user           $EMAIL_ADDRESS"                     >> $BUILD_DIR/.apt/etc/msmtprc
+echo "password       $EMAIL_PASSWORD"                    >> $BUILD_DIR/.apt/etc/msmtprc
+echo "# Set a default account"                           >> $BUILD_DIR/.apt/etc/msmtprc
+echo "account default : gmail"                           >> $BUILD_DIR/.apt/etc/msmtprc
+
+
+
 #give environment to later buildpacks
 export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPPATH|PKG_CONFIG_PATH|PERL5LIB|GUILE_LOAD_PATH|GUILE_LOAD_COMPILED_PATH)=' > "$LP_DIR/export"
