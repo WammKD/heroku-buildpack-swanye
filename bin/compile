@@ -84,7 +84,7 @@ cat "/etc/apt/sources.list" > "$APT_SOURCES"    # no cp here
 
 topic "Updating apt caches"
 apt-get $APT_OPTIONS update | indent
-apt-get $APT_OPTIONS -y $APT_FORCE_YES -d install --reinstall openssl msmtp | indent
+apt-get $APT_OPTIONS -y $APT_FORCE_YES -d install --reinstall msmtp | indent
 
 mkdir -p $BUILD_DIR/.apt
 
