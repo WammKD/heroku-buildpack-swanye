@@ -95,14 +95,6 @@ function topic() {
 # done
 
 
-cd /tmp
-
-topic "Installing msmtp"
-wget -c https://marlam.de/msmtp/releases/msmtp-1.8.11.tar.xz       && \
-	tar xJf msmtp-1.8.11.tar.xz                                      && \
-	rm -f msmtp-1.8.11.tar.xz                                        && \
-	cd msmtp-1.8.11                                                  && \
-	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
 
@@ -121,6 +113,18 @@ echo "user           $EMAIL_ADDRESS"                     >> $BUILD_DIR/.apt/etc/
 echo "password       $EMAIL_PASSWORD"                    >> $BUILD_DIR/.apt/etc/msmtprc
 echo "# Set a default account"                           >> $BUILD_DIR/.apt/etc/msmtprc
 echo "account default : gmail"                           >> $BUILD_DIR/.apt/etc/msmtprc
+if
+	[ ! -f $CACHE_DIR/.apt/bin/art ]
+then
+	cd /tmp
+
+	topic "Installing msmtp"
+	wget -c https://marlam.de/msmtp/releases/msmtp-1.8.11.tar.xz       && \
+		tar xJf msmtp-1.8.11.tar.xz                                      && \
+		rm -f msmtp-1.8.11.tar.xz                                        && \
+		cd msmtp-1.8.11                                                  && \
+		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
+fi
 
 
 
