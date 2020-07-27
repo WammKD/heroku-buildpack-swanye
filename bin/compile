@@ -12,6 +12,7 @@ LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILD_DIR=$1
 CACHE_DIR=$2
 INDUSTRIA_VERSION=2.1.0
+MSMTP_VERSION=1.8.11
 
 function indent() {
 	c='s/^/       /'
@@ -102,11 +103,11 @@ then
 	cd /tmp
 
 	topic "Installing msmtp"
-	wget -c https://marlam.de/msmtp/releases/msmtp-1.8.11.tar.xz       && \
-		tar xJf msmtp-1.8.11.tar.xz                                      && \
-		rm -f msmtp-1.8.11.tar.xz                                        && \
-		cd msmtp-1.8.11                                                  && \
-		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
+	wget -c https://marlam.de/msmtp/releases/msmtp-$MSMTP_VERSION.tar.xz && \
+		tar xJf msmtp-$MSMTP_VERSION.tar.xz                                && \
+		rm -f msmtp-$MSMTP_VERSION.tar.xz                                  && \
+		cd msmtp-$MSMTP_VERSION                                            && \
+		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install   && cd ..
 
 
 	topic "Installing Industria's Blowfish"
