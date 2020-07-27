@@ -11,6 +11,7 @@ set -e
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILD_DIR=$1
 CACHE_DIR=$2
+INDUSTRIA_VERSION=2.1.0
 
 function indent() {
 	c='s/^/       /'
@@ -106,6 +107,16 @@ then
 		rm -f msmtp-1.8.11.tar.xz                                        && \
 		cd msmtp-1.8.11                                                  && \
 		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
+
+
+	topic "Installing Industria's Blowfish"
+	wget -c https://github.com/weinholt/industria/archive/v$INDUSTRIA_VERSION.tar.gz                                        && \
+		tar xvzf v$INDUSTRIA_VERSION.tar.gz                                                                                   && \
+		rm -f v$INDUSTRIA_VERSION.tar.gz                                                                                      && \
+		mkdir $BUILD_DIR/.apt/usr/share/guile/3.0/industria                                                                   && \
+		mkdir $BUILD_DIR/.apt/usr/share/guile/3.0/industria/crypto                                                            && \
+		cp industria-$INDUSTRIA_VERSION/crypto/blowfish.sls $BUILD_DIR/.apt/usr/share/guile/3.0/industria/crypto/blowfish.scm && \
+		rm -rf industria-$INDUSTRIA_VERSION                                                                                   && cd ..
 fi
 
 
